@@ -8,6 +8,9 @@ public class Rotate : MonoBehaviour
     private Quaternion originalRotation;
     private Quaternion targetRotation;
 
+    [SerializeField]
+    private float rotateTime = 2f;
+
     void Start()
     {
         originalRotation = transform.rotation;
@@ -20,7 +23,8 @@ public class Rotate : MonoBehaviour
         {
             isRotating = !isRotating;
             targetRotation = isRotating ? Quaternion.Euler(90, 0, 0) : originalRotation;
+            FindObjectOfType<SoundManager>().PlayRotateSound();
         }
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotateTime);
     }
 }

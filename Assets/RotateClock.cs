@@ -9,6 +9,9 @@ public class RotateClock : MonoBehaviour
     private Quaternion originalRotation;
     private Quaternion targetRotation;
 
+    [SerializeField]
+    private float rotateTime = 2f;
+
     void Start()
     {
         originalRotation = transform.rotation;
@@ -19,6 +22,7 @@ public class RotateClock : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
+            FindObjectOfType<SoundManager>().PlayRotateSound();
             if (isRotating)
             {
                 targetRotation *= Quaternion.Euler(90, 0, 0);
@@ -28,7 +32,7 @@ public class RotateClock : MonoBehaviour
 
         if (isRotating)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotateTime);
         }
     }
 }

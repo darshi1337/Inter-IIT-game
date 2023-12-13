@@ -9,14 +9,21 @@ public class Buttons : MonoBehaviour
 {
     [SerializeField]
     private Animator settingsAnimator;
+
+    [SerializeField]
+    private LevelChanger levelChanger;
+
+    private void Start()
+    {
+        levelChanger = FindObjectOfType<LevelChanger>();
+    }
     public void Retry()
     {
-        SceneManager.LoadScene(1);
-        Time.timeScale = 1f; 
+        levelChanger.FadeToLevel(SceneManager.GetActiveScene().buildIndex);
     }
     public void Play()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        levelChanger.FadeToLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Pause()
@@ -36,7 +43,7 @@ public class Buttons : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        levelChanger.FadeToLevel(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
     }
     public void Settings()
@@ -74,7 +81,7 @@ public class Buttons : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneManager.LoadScene(0);
+        levelChanger.FadeToLevel(0);
         Time.timeScale = 1;
     }
 

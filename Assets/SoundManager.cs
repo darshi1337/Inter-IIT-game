@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
@@ -26,6 +27,23 @@ public class SoundManager : MonoBehaviour
         else
         {
             audioSource.PlayOneShot(rotateSound);
+        }
+    }
+    
+    public void OnEnable()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            if (audioSource == null)
+            {
+                audioSource = GetComponent<AudioSource>();
+                audioSource.PlayOneShot(Resources.Load<AudioClip>("up_swish"));
+
+            }
+            else
+            {
+                audioSource.PlayOneShot(Resources.Load<AudioClip>("up_swish"));
+            }
         }
     }
 
