@@ -22,7 +22,7 @@ public class RotateAroundY : MonoBehaviour
         {
             targetRotation = Quaternion.Euler(0, angle, 0);
             angle -= 90;
-            //angle = Mathf.Clamp(angle, 0, 360);
+            angle = angle%360;
         }
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
     }

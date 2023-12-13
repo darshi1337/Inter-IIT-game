@@ -22,6 +22,7 @@ public class RotateCounterClock : MonoBehaviour
             if (isRotating)
             {
                 targetRotation *= Quaternion.Euler(-90, 0, 0);
+                targetRotation.x = targetRotation.x % 360;
             }
         }
 

@@ -33,18 +33,18 @@ public class GameManager : MonoBehaviour
             //print(pc.conditions.Count);
             for (int i = 0; i < pc.conditions.Count; i++)
             {
-                print(pc.conditions[i].conditionObject.eulerAngles + " " + pc.conditions[i].eulerAngle);
+                //print(pc.conditions[i].conditionObject.eulerAngles + " " + pc.conditions[i].eulerAngle);
                 //if (pc.conditions[i].conditionObject.eulerAngles == pc.conditions[i].eulerAngle)
 
                 if ((Mathf.Abs(Vector3.Distance(pc.conditions[i].conditionObject.eulerAngles, pc.conditions[i].eulerAngle))) <= 1f)
                 {
                     count++;
-                    print(count + "hello");
+                    //print(count + "hello");
                 }
             }
             foreach (SinglePath sp in pc.paths)
             {
-                print(count + " " + pc.conditions.Count);
+                //print(count + " " + pc.conditions.Count);
                 sp.block.possiblePaths[sp.index].active = (count == pc.conditions.Count);
             }
         }
@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
         if (player.walking)
             return;
 
+        if(pivots.Count!=0)
+        {
+            //print(pivots.Count);
         if (Input.GetMouseButtonDown(1))
         {
             soundManager.PlayRotateSound();
@@ -62,6 +65,7 @@ public class GameManager : MonoBehaviour
         foreach (Transform t in objectsToHide)
         {
             t.gameObject.SetActive(pivots[0].eulerAngles.y > 45 && pivots[0].eulerAngles.y < 90 + 45);
+        }
         }
 
         if (Input.GetKeyDown(KeyCode.R))
