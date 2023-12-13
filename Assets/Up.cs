@@ -5,17 +5,19 @@ public class Up : MonoBehaviour
 {
     public Vector3 targetPosition = new Vector3(0f, 2.5f, -2f);
     public float arrivalDistance = 0.1f;
-    public float transitionDuration = 1.25f;
+    public float rotationDuration = 1.25f;
 
     private bool hasArrived = false;
-    private Vector3 startPosition;
+    private Quaternion startRotation;
+    private Quaternion targetRotation;
     private float elapsedTime = 0f;
 
     private SoundManager soundManager;
 
     void Start()
     {
-        startPosition = transform.position;
+        startRotation = transform.rotation;
+        targetRotation = Quaternion.Euler(0f, 0f, 0f);
         soundManager = GameObject.Find("GameManager").GetComponent<SoundManager>();
     }
 
@@ -33,19 +35,19 @@ public class Up : MonoBehaviour
                 soundManager = GameObject.Find("GameManager").GetComponent<SoundManager>();
                 soundManager.PlayRotateSound();
             }
-            StartCoroutine(SmoothTransition());
+            StartCoroutine(SmoothRotation());
         }
     }
 
-    IEnumerator SmoothTransition()
+    IEnumerator SmoothRotation()
     {
-        while (elapsedTime < transitionDuration)
+        while (elapsedTime < rotationDuration)
         {
-            transform.position = Vector3.Lerp(startPosition, new Vector3(0f, 0f, 0f), elapsedTime / transitionDuration);
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime / rotationDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        transform.position = new Vector3(0f, 0f, 0f);
+        transform.rotation = targetRotation;
     }
 }
