@@ -356,6 +356,7 @@
 "Assets/PlayerAnimation.cs"
 "Assets/PlayerController.cs"
 "Assets/Rotate.cs"
+"Assets/RotateAroundY.cs"
 "Assets/RotateClock.cs"
 "Assets/RotateCounterClock.cs"
 "Assets/RotateOnArrival.cs"
