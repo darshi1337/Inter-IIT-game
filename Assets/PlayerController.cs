@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator LoadAfterDelay()
     {
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        FindObjectOfType<LevelChanger>().FadeToLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }
