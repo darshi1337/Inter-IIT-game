@@ -34,6 +34,6 @@ public class Timer : MonoBehaviour
     }
     private void OnEnd()
     {
-        SceneManager.LoadScene(6);
+        FindObjectOfType<LevelChanger>().FadeToLevel(6);
     }
 }
